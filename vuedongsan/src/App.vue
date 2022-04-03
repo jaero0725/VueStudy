@@ -6,7 +6,8 @@
     <a v-for="menu in menus" :key="menu">{{ menu }} </a>
   </div>
   <TheDiscount/>
-  <TheCard :oneroom="oneroom" v-for="oneroom in onerooms" :key="oneroom"/>
+  <!--@작명한거 $event 자식이 전달해준 데이터-->
+  <TheCard @openModal="isModalOpen=true; clickIndex=$event" :oneroom="oneroom" v-for="oneroom in onerooms" :key="oneroom"/>
 </template>
 
 <script>
