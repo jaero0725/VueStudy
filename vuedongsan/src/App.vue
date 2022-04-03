@@ -1,21 +1,23 @@
 <template>
+
   <div class="black-bg" v-if="isModalOpen">
     <div class="white-bg">
-      <h4>상세페이지</h4>
-      <p>상세페이지내용임</p>
+      <h4>{{ onerooms[clickIndex].title }}</h4>
+      <p> {{ onerooms[clickIndex].content }} </p>
       <button @click="isModalOpen=false">닫기</button>
     </div>
   </div>
+
   <div class ="menu">
     <a v-for="menu in menus" :key="menu">{{ menu }} </a>
   </div>
   
-  <div v-for="(oneroom, index) in onerooms" :key="index">
-    <img :src="onerooms[index].image" class="room-img">
-    <h4 @click="isModalOpen = true">{{onerooms[index].title}}</h4>
-    <p>{{onerooms[index].content}}</p>
-    <p>{{onerooms[index].price}}</p> 
+  <div v-for="(oneroom, i) in onerooms" :key="i">
+    <img :src="oneroom.image" class="room-img">
+    <h4 @click="isModalOpen = true; clickIndex = i">{{oneroom.title}}</h4>
+    <p>{{oneroom.price}}</p> 
   </div>
+
 </template>
 
 <script>
@@ -26,6 +28,7 @@ export default {
   data(){ 
     return{
        isModalOpen : false, // true : 열림, false : 닫힘 
+       clickIndex : 0, //상품 뭐클릭했는지. (누른거)
        menus : ['Home', 'Shop','About'],
        onerooms : data,
     }
