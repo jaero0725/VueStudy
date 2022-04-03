@@ -6,14 +6,23 @@
       <h4>{{ onerooms[clickIndex].title }}</h4>
       <p> {{ onerooms[clickIndex].content }} </p>
       <p> 가격 : {{ onerooms[clickIndex].price }}원 </p>
-      <button @click="isModalOpen=false">닫기</button>
+      <!-- <button @click="isModalOpen=false">닫기</button> -->
     </div>
   </div>
 </template>
 
 <script>
 export default{
-    name : "TheModal"
+    name : "TheModal",
+    data(){
+        //자식 컴포넌트에 만들떄 부모도 쓰는 데이터라면 부모컴포넌트에 만들기
+        //밑으로 전송하는것이 더 쉽기 떄문에. 
+    },
+    props :{
+        onerooms :  Array ,//데이터 형식
+        isModalOpen : Boolean,
+        clickIndex : Number
+    }
 }
 </script>
 

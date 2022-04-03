@@ -1,10 +1,14 @@
 <template>
-  <TheModal/>
+  <!--v-bind : props전송, databinding에 쓰임 , 작명 ="실제이름" -->
+  <!--props쓰는 3스텝 공부 -->
+  <TheModal :onerooms="onerooms" :isModalOpen="isModalOpen" :clickIndex="clickIndex"/> <!-- 자식 컴포넌트 부모가 갖은 데이터쓰려면 props사용해야됨. -->
   <div class ="menu">
     <a v-for="menu in menus" :key="menu">{{ menu }} </a>
   </div>
   <TheDiscount/>
 
+  <!--숙제 : 상품목록 Card라는 컴포넌트로 바꾸기 -->
+  <!-- <Card/> -->
   <div v-for="(oneroom, i) in onerooms" :key="i">
     <img :src="oneroom.image" class="room-img">
     <h4 @click="isModalOpen = true; clickIndex = i">{{oneroom.title}}</h4>
@@ -21,9 +25,9 @@ export default {
   name: 'App',
   data(){ 
     return{
+       menus : ['Home', 'Shop','About'],
        isModalOpen : false, // true : 열림, false : 닫힘 
        clickIndex : 0, //상품 뭐클릭했는지. (누른거)
-       menus : ['Home', 'Shop','About'],
        onerooms : data,
     }
   },
