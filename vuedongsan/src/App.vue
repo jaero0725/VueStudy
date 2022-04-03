@@ -9,10 +9,8 @@
 
   <!--숙제 : 상품목록 Card라는 컴포넌트로 바꾸기 -->
   <!-- <Card/> -->
-  <div v-for="(oneroom, i) in onerooms" :key="i">
-    <img :src="oneroom.image" class="room-img">
-    <h4 @click="isModalOpen = true; clickIndex = i">{{oneroom.title}}</h4>
-  </div>
+
+  <Card :onerooms="onerooms"/>
 
 </template>
 
