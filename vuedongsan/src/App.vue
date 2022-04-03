@@ -6,27 +6,24 @@
     <a v-for="menu in menus" :key="menu">{{ menu }} </a>
   </div>
   <TheDiscount/>
-
-  <!--숙제 : 상품목록 Card라는 컴포넌트로 바꾸기 -->
-  <!-- <Card/> -->
-
-  <Card :onerooms="onerooms"/>
-
+  <TheCard :oneroom="oneroom" v-for="oneroom in onerooms" :key="oneroom"/>
 </template>
 
 <script>
 import data from './assets/oneroom'; //확장자 생략 가능 
 import TheDiscount from './Discount';
 import TheModal from './Modal';
+import TheCard from './Card';
 
 export default {
   name: 'App',
   data(){ 
     return{
+       오브젝트 : {name :"kim", age : 20 },
        menus : ['Home', 'Shop','About'],
        isModalOpen : false, // true : 열림, false : 닫힘 
        clickIndex : 0, //상품 뭐클릭했는지. (누른거)
-       onerooms : data,
+       onerooms : data
     }
   },
 
@@ -36,7 +33,8 @@ export default {
 
   components: {
     TheDiscount : TheDiscount,
-    TheModal : TheModal
+    TheModal : TheModal,
+    TheCard : TheCard
   }
   
 }
@@ -61,11 +59,4 @@ export default {
   color : white;
   padding : 10px;
 }
-.room-img{
-  width:100%;
-  margin-top:40px;
-}
-
-
-
 </style>
