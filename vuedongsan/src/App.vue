@@ -1,7 +1,12 @@
 <template>
   <!--v-bind : props전송, databinding에 쓰임 , 작명 ="실제이름" -->
   <!--props쓰는 3스텝 공부 -->
-  <TheModal @closeModal="isModalOpen=false" :onerooms="onerooms" :isModalOpen="isModalOpen" :clickIndex="clickIndex"/> <!-- 자식 컴포넌트 부모가 갖은 데이터쓰려면 props사용해야됨. -->
+  <transition name="fade">
+    <TheModal @closeModal="isModalOpen=false" 
+    :onerooms="onerooms" :isModalOpen="isModalOpen" 
+    :clickIndex="clickIndex"/>
+  </transition>
+     <!-- 자식 컴포넌트 부모가 갖은 데이터쓰려면 props사용해야됨. -->
   <div class ="menu">
     <a v-for="menu in menus" :key="menu">{{ menu }} </a>
   </div>
@@ -9,7 +14,11 @@
   <!--@작명한거 $event 자식이 전달해준 데이터-->
   <TheCard @openModal="isModalOpen=true; clickIndex=$event" :oneroom="oneroom" v-for="oneroom in onerooms" :key="oneroom"/>
 </template>
-
+<!-- CSS 로 애니메이션 주려면
+1. 시작전 class 명
+2. 애니메이션 끝난 후 class명
+3. 그리고 원할때 2번 class 명 부착
+-->
 <script>
 import data from './assets/oneroom'; //확장자 생략 가능 
 import TheDiscount from './Discount';
@@ -42,6 +51,7 @@ export default {
 </script>
 
 <style>
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -59,5 +69,25 @@ export default {
 .menu a {
   color : white;
   padding : 10px;
+}
+
+.fade-enter-from{
+  transform:translateY(-1000px);
+} 
+.fade-enter-active{
+  transition: all 1s;
+}
+.fade-enter-to{
+  transform:translateY(0px);
+}
+
+.fade-leave-from{
+  transform:translateY(0px);
+} 
+.fade-leave-active{
+  transition: all 0.5s;
+}
+.fade-leave-to{
+  transform:translateY(-1000px);
 }
 </style>
