@@ -29,6 +29,11 @@ export default{
             month : 1,
         } 
     },
+    update(){
+        if(this.month == 2){
+            alert("2라고 기입하다니!");
+        }
+    },
     //데이터를 감시하는 감시자
     watch :{
         //month에 숫자만 있는지 감시 
@@ -54,12 +59,12 @@ export default{
     props :{
         onerooms :  Array ,//데이터 형식
         isModalOpen : Boolean,
-        clickIndex : Number
+        clickIndex : Number,
     },
     methods:{
         close(){ //애밋하면 애미한테 메시지전달
             this.$emit('closeModal');
-        }
+        },
     }
 }
 </script>

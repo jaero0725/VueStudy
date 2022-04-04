@@ -1,13 +1,18 @@
 <template>
     <div class="discount">
-        <h4>지금 결제하면 20% 할인</h4>
+        <h4>지금 결제하면 {{saleRate}}% 할인</h4>
     </div>
 </template>
 
 <script>
 export default{
-    name :'TheDiscount'
+    name :'TheDiscount',
+
+    props : {
+        saleRate : Number
+    }
 }
+
 
 //1. vue파일 import
 //2. 등록

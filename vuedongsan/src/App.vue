@@ -4,18 +4,19 @@
   <transition name="fade">
     <TheModal @closeModal="isModalOpen=false" 
     :onerooms="onerooms" :isModalOpen="isModalOpen" 
-    :clickIndex="clickIndex"/>
+    :clickIndex="clickIndex"
+    />
   </transition>
      <!-- 자식 컴포넌트 부모가 갖은 데이터쓰려면 props사용해야됨. -->
   <div class ="menu">
     <a v-for="menu in menus" :key="menu">{{ menu }} </a>
   </div>
-  <TheDiscount/>
+
+  <TheDiscount v-if="showDiscount" :saleRate="saleRate"/> <!--2초후에 삭제하려면?-->
 
   <!-- 정렬기능 priceSort 함수 -->
   <button @click="priceSort">가격순정렬</button>
   <button @click="priceReSort">가격역순정렬</button>
-  <button @click="titleSort">가나다순정렬</button>
   <button @click="sortBack">되돌리기</button>
   <!--@작명한거 $event 자식이 전달해준 데이터-->
   <TheCard @openModal="isModalOpen=true; clickIndex=$event" :oneroom="oneroom" v-for="oneroom in onerooms" :key="oneroom"/>
@@ -35,14 +36,17 @@ export default {
   name: 'App',
   data(){ 
     return{
+       showDiscount : true,
        오브젝트 : {name :"kim", age : 20 },
        menus : ['Home', 'Shop','About'],
        isModalOpen : false, // true : 열림, false : 닫힘 
        clickIndex : 0, //상품 뭐클릭했는지. (누른거)
 
        onerooms : data, //정렬은 이걸로, 
-       oneroomsOriginal : [...data] //오리지널 데이터 백하면 이걸로  (데이터 원본)
+       oneroomsOriginal : [...data], //오리지널 데이터 백하면 이걸로  (데이터 원본)
        //각각 별개로 저장하고 싶으면 [...?] 이런식으로
+
+       saleRate : 10
     }
   },
 
@@ -66,13 +70,28 @@ export default {
           return b.price-a.price;  // 음수면, 왼쪽으로 보내라
         }); 
     },
-    //가나다순정렬 
-    titleSort(){ // ? 
-      this.oneroom.sort(function(a,b){
-        return a.title.localeCompare(b.title)
-      });
-    }
   },
+  //서버에서 데이터가져올때 lifecycle가져옴. 
+  //html 생성전 데이터만 존재할떄,
+  create(){
+
+  },
+  // mount됐을때.
+  mounted(){ 
+    //this 쓰려면 => function으로 
+  //  setTimeout(()=>{
+  //    this.showDiscount = false; 
+  //  },2000)
+  
+    // # 30%할인이, 1초마다 1%씩 감소하도록 코드를 짠다. 
+    setInterval(() => {
+      if(this.saleRate <= 0 ) this.saleRate = 0;
+      else this.saleRate--;
+    }, 1000);
+  //누군가가, 2라고 기입하면 알림창을 띄우려면? .->update를 사용 ? 
+  
+},
+
 
   components: {
     TheDiscount : TheDiscount,
@@ -113,7 +132,6 @@ export default {
 .fade-enter-to{
   transform:translateY(0px);
 }
-
 .fade-leave-from{
   transform:translateY(0px);
 } 
