@@ -11,6 +11,12 @@
     <a v-for="menu in menus" :key="menu">{{ menu }} </a>
   </div>
   <TheDiscount/>
+
+  <!-- 정렬기능 priceSort 함수 -->
+  <button @click="priceSort">가격순정렬</button>
+  <button @click="priceReSort">가격역순정렬</button>
+  <button @click="titleSort">가나다순정렬</button>
+  <button @click="sortBack">되돌리기</button>
   <!--@작명한거 $event 자식이 전달해준 데이터-->
   <TheCard @openModal="isModalOpen=true; clickIndex=$event" :oneroom="oneroom" v-for="oneroom in onerooms" :key="oneroom"/>
 </template>
@@ -33,12 +39,39 @@ export default {
        menus : ['Home', 'Shop','About'],
        isModalOpen : false, // true : 열림, false : 닫힘 
        clickIndex : 0, //상품 뭐클릭했는지. (누른거)
-       onerooms : data
+
+       onerooms : data, //정렬은 이걸로, 
+       oneroomsOriginal : [...data] //오리지널 데이터 백하면 이걸로  (데이터 원본)
+       //각각 별개로 저장하고 싶으면 [...?] 이런식으로
     }
   },
 
   methods:{
-
+    priceSort(){
+      this.onerooms.sort(
+        function(a,b){
+          return a.price-b.price;  // 음수면, 왼쪽으로 보내라
+        }); 
+    },
+    //sort()하면 원본이 변형됨, 유지하려면 map으로 함. -> 원본 데이터 보호하는게 유행. 
+    sortBack(){
+      //this.onerooms = this.oneroomsOriginal; // 이렇게 하면안됨.ㅇㅇ , 값을 공유하라는 뜻. 
+      this.onerooms = [...this.oneroomsOriginal]
+      //데이터베이스에서 해도됨. 
+    },
+    //가격역순정렬
+    priceReSort(){
+      this.onerooms.sort(
+        function(a,b){
+          return b.price-a.price;  // 음수면, 왼쪽으로 보내라
+        }); 
+    },
+    //가나다순정렬 
+    titleSort(){ // ? 
+      this.oneroom.sort(function(a,b){
+        return a.title.localeCompare(b.title)
+      });
+    }
   },
 
   components: {
