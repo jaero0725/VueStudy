@@ -25,12 +25,16 @@
     </div>
   </nav>
 
+  <!-- /~로 접속을하면 이자리에 List.vue 에 접속한다. -->
+  <router-view></router-view>
+
   <!-- 블로그 글 List :blog="blog" 로 props 로 보내줌 -->
-  <TheList :blog="blog" v-for="blog in blogs" :key="blog"/>
+  <!-- <TheList :blog="blog" v-for="blog in blogs" :key="blog"/> -->
 </template>
 
 <script>
-import TheList from './components/List'
+// import TheList from './components/List'
+
 import blogs from './assets/blog.js'
 export default {
   name: 'App',
@@ -55,3 +59,15 @@ export default {
   color: #2c3e50;
 }
 </style>
+
+
+<!--
+  Vue Router 다운
+  > npm install vue-router@4
+
+  실행
+  > npm run serve
+
+  main.js 에 작업 
+
+-->
