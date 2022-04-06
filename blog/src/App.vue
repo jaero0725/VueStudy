@@ -1,14 +1,17 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Zeroco Coding</a>
+      <router-link class="navbar-brand" to="/"> Zeroco Coding </router-link>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <router-link class="nav-link active" aria-current="page" to="/"> Home </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link active" aria-current="page" to="/list"> List </router-link>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="https://github.com/jaero0725" target="_blank" >Github</a>
@@ -26,16 +29,15 @@
   </nav>
 
   <!-- /~로 접속을하면 이자리에 List.vue 에 접속한다. -->
-  <router-view></router-view>
+  <router-view :blogs="blogs"></router-view>
 
   <!-- 블로그 글 List :blog="blog" 로 props 로 보내줌 -->
   <!-- <TheList :blog="blog" v-for="blog in blogs" :key="blog"/> -->
 </template>
 
 <script>
-// import TheList from './components/List'
-
 import blogs from './assets/blog.js'
+
 export default {
   name: 'App',
   data(){
@@ -44,7 +46,7 @@ export default {
     }
   },
   components: {
-    TheList : TheList,
+
   }
 }
 </script>

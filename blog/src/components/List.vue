@@ -1,7 +1,15 @@
 <template>
     <div>
-        <h5>{{blog.title}}</h5>
-        <p>{{blog.content}}</p>
+        <h5>{{blogs[0].title}}</h5>
+        <p>{{blogs[0].content}}</p>
+    </div>
+    <div>
+        <h5>{{blogs[1].title}}</h5>
+        <p>{{blogs[1].content}}</p>
+    </div>
+    <div>
+        <h5>{{blogs[2].title}}</h5>
+        <p>{{blogs[2].content}}</p>
     </div>
 </template>
   
@@ -10,9 +18,8 @@
   export default {
     name: 'TheList',
     props:{
-        blog :  Object //데이터 형식
+        blogs :  Object //데이터 형식
     },
-
   }
   </script>
   

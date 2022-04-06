@@ -5,16 +5,18 @@
 
 import { createWebHistory, createRouter } from "vue-router";
 import List from './components/List.vue';
+import Home from './components/Home.vue';
 
 const routes = [
   {
     path: "/list",  //이경로로 접속을 하면
-    component: List.vue, //이 컴포넌트를 보여주세요.
+    component: List, //이 컴포넌트를 보여주세요. List.vue 가 아니고 List로 적어놓아야됨.
   },
   {
-    path: "/list",  //이경로로 접속을 하면
-    component: List.vue, //이 컴포넌트를 보여주세요.
-  }
+    path: "/", 
+    component: Home,
+  },
+
 ];
 
 const router = createRouter({
