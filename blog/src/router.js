@@ -12,22 +12,22 @@ import Comment from './views/Comment.vue';
 
 const routes = [
   {
-    path: "/list",  //이경로로 접속을 하면
-    component: List, //이 컴포넌트를 보여주세요. List.vue 가 아니고 List로 적어놓아야됨.
-    // beforeEnter: (to, from)=>{
-    //     return to.fullPath
-    // }  
-},
-  {
-    path: "/", 
+    path: "/vueStudy", 
     component: Home,
     beforeEnter: ()=>{
         //이런식으로 경로들어가기전에 로직 작성가능
 
-      }
+  }
   },
   {
-    path: '/list/:detailId',
+    path: "/vueStudy/list",  //이경로로 접속을 하면
+    component: List, //이 컴포넌트를 보여주세요. List.vue 가 아니고 List로 적어놓아야됨.
+    // beforeEnter: (to, from)=>{
+    //     return to.fullPath
+    // }  
+  },
+  {
+    path: '/vueStudy/list/:detailId',
     component: Detail,
     children: [
         {
